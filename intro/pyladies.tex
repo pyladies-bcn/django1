@@ -1,0 +1,273 @@
+%\documentclass{beamer}
+%
+%\title{Introduction to debugging in Python}
+%\author{PyladiesBCN - @lpmayos}
+%\date{February 26, 2015}
+%
+%\usetheme{pyladies}
+%
+%\begin{document}
+%\maketitle
+
+
+\documentclass{beamer}
+\usetheme{pyladies}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{listings} 
+
+%% Use any fonts you like.
+\usepackage{helvet}
+\graphicspath{ {IMG/} }
+
+\title{Django 1: Introduction to Django Models}
+\subtitle{Models and tables}
+\author{Elena He}
+\date{\today}
+\institute{PyladiesBCN}
+
+\begin{document}
+
+\begin{frame}[plain,t]
+\titlepage
+\end{frame}
+
+
+
+\section{What are we going to do}
+	\begin{frame}
+	\frametitle{Summary}
+	\tableofcontents
+	\end{frame}
+
+	\subsection{Manifest}
+	\begin{frame}
+		\frametitle{Goal}
+		Who haven't heard about Django?
+		\pause
+		\begin{columns}
+			\column{.5\textwidth}
+			DO:
+				\begin{itemize}[<+->]
+				\item Use Django ORM
+				\item Build a model
+				\item Learn SQL
+				\item Work with MySQL
+				\end{itemize}
+			\column{.5\textwidth}
+			DO NOT:
+				\begin{itemize}[<+->]
+				\item Install Django
+				\item Go deep into details of Django inner parts
+				\item Hack anything
+				\item Break anything (consciounsly)
+				\end{itemize}
+		\end{columns}
+	\end{frame}
+\section{Introduction}
+	\subsection{What's a Model}
+	\begin{frame}
+		\frametitle{What's a Model}
+		A model is a way to structure the information to simulate reality. \pause
+		\includegraphics[width=\textwidth]{perception} 
+	\end{frame}
+
+	\subsection{Object Oriented Programming}
+	\begin{frame}
+		\frametitle{OOP}
+		\begin{itemize}[<+->]
+			\item All the domain is represented as objects.
+			\item Each object is independent
+			\item Each object has his responsabilities
+			\item Each object has his functions, attributes
+			\item Objects interact politey among their acquaintances
+		\end{itemize}
+	\end{frame}
+
+	\subsection{Good Practices}
+	\begin{frame}
+		\frametitle{Good Practices}	
+		\begin{columns}[c]
+			\column{.5\textwidth} 
+			\begin{itemize}[<+->]
+				\item Use logic 
+				\item Abstraction 
+				\item Do not repeat yourself 
+				\item Single responsability 
+				\item KISS
+			\end{itemize}
+			\column{.5\textwidth} 
+				\includegraphics<1>[width=\textwidth]{logical}
+				\includegraphics<2>[width=\textwidth]{bull11}
+				\includegraphics<3>[width=\textwidth]{repeat}
+				\includegraphics<4>[width=\textwidth]{single}
+				\includegraphics<5>[width=\textwidth]{kiss}
+		\end{columns}
+	\end{frame}
+
+\section{DataBase Management Systems (DBMS)}
+
+	\subsection{What's a Database}
+	\begin{frame}
+		\frametitle{Databases}
+		A database is a black box who stores and manages the information \\ 
+		\includegraphics<1>[width=.6\textwidth]{blackbox} 
+		\pause
+		How it stores/retrieves the information is not of our concern. \\ \pause  
+		{\tt It is trustworthy}\\ \pause
+		We use DB specific language to communicate with a DBMS. \\\pause 
+		{\tt SQL}\\ \pause
+		Django ORM is a layer of abstraction to release this communication ( developer - DBMS ) to Django. \\\pause
+		You can invest your time doing something productive!
+		
+	\end{frame}
+
+	\begin{frame}
+	\frametitle{DBMS Stantard Organization}
+		\begin{columns}
+		\column{.5\textwidth}
+		\begin{itemize}[<+->]
+			\item DBMS is the whole system. 
+			\item DBMS is divided into DATABASES
+			\item Each DATABASE has his TABLES
+			\item Each USER has specific permissions to access/operate any part of the DBMS
+			\item ROOT can do ANYTHING! Be aware of his usage
+		\end{itemize}
+		\column{.5\textwidth}
+		\includegraphics<1-2>[width=\textwidth]{building} 
+		\includegraphics<3>[width=\textwidth]{apartamento} 
+		\includegraphics<4>[width=\textwidth]{key} 
+		\includegraphics<5>[width=\textwidth]{root} 
+		\end{columns}
+	\end{frame}
+
+\section{SQL Syntax}
+
+	\begin{frame}
+		\frametitle{Introduction to SQL}
+		SQL (Standard Query Language) is Standarized by ANSI \\\pause
+		SQL is not case sensitive \\\pause
+		Each DBMS implements his own version \\\pause
+		{\tt Same-same, different-different} \\\pause
+		Let's start with SQL Syntax !
+	\end{frame}
+
+	\subsection{Database Concerned}
+	\begin{frame}
+		\frametitle{Operations over Databases}
+		%\begin{columns}[c]
+		%	\column{.5\textwidth} 
+			\begin{itemize}[<+->]
+			 	\item Create Database
+			 	\begin{itemize}
+			 		\item CREATE DATABASE newDatabaseName
+			 	\end{itemize}
+			 	\item Delete Database
+			 	\begin{itemize}
+			 		\item DROP DATABASE databaseName
+			 	\end{itemize}
+			 	\item Modify Database
+			 	\begin{itemize}
+			 		\item ALTER DATABASE databaseName specs
+			 	\end{itemize}
+			\end{itemize}
+	\end{frame}
+
+	\subsection{Table Concerned}
+	\begin{frame}
+	 	\frametitle{Operations over Tables}
+	 	\begin{itemize}[<+->]
+	 		\item Create Table
+	 		\begin{itemize}
+	 			\item CREATE TABLE newTableName
+	 		\end{itemize} 		
+	 		\item Delete Table
+	 		\begin{itemize}
+		 		\item DROP TABLE tableName
+			\end{itemize}
+	 		\item Modify Table
+	 		\begin{itemize}
+	 			\item ALTER TABLE tableName specs
+			\end{itemize}
+	 	\end{itemize}
+	\end{frame}
+
+	\subsection{Item Concerned}
+	\begin{frame}
+		\frametitle{Operations over Items}
+	 	\begin{itemize}[<+->]
+	 		\item Select Item/s
+	 		\begin{itemize}
+		 		\item SELECT Items schemaName.tableName 
+			\end{itemize}
+	 		\item Update Item/s
+	 		\begin{itemize}
+		 		\item  UPDATE tableName SET col1=something ...
+			\end{itemize}
+	 		\item Insert Item/s
+	 		\begin{itemize}
+		 		\item INSERT INTO tableName (col1,..., coln) VALUES (11,...,1n),(...),(n1,..., nn)
+			\end{itemize}
+	 		\item Delete Item/s
+	 		\begin{itemize}
+		 		\item DELETE FROM tableName
+			\end{itemize}
+	 	\end{itemize}
+	\end{frame}
+
+\section{Exercises}
+
+	\begin{frame}
+	 	\frametitle{Exercises time!}
+	 	\begin{itemize}
+	 		\item Let's create a Django Model
+	 		\item Import data to the model
+	 		\item Play with the data
+	 	\end{itemize}
+	\end{frame}
+
+	\subsection{Creating Django Model}
+	\begin{frame}
+		\frametitle{Create Model}
+		\begin{itemize}[<+->]
+			\item Model related to Employee
+			\item 6 Model objects
+			\item Reference: https://docs.djangoproject.com/en/1.8/ref/models/fields/
+		\end{itemize}
+	\end{frame}
+
+	\subsection{Import data to the model}
+	\begin{frame}
+		\frametitle{Import data to the model}
+		\begin{itemize}[<+->]
+			\item clone repository from github
+			\begin{itemize}
+				\item git clone https://github.com/pyladies-bcn/django1.git
+			\end{itemize}
+			\item go to the folder django1/db
+			\item locate employees.sql
+			\item import it to your mysql installation
+			\item check there are no errors. Errors are evil!
+		\end{itemize}
+	\end{frame}
+
+	\subsection{Play with the data}
+	\begin{frame}
+		\frametitle{Play with the data}
+		After populating our model with registers, we have lots of data. \\ \pause
+		We are going to look for  INTERESTING  Employees.
+		\begin{itemize}[<+->]
+			\item Look for the oldest/youngest employee
+			\item Look for the employee with the highest/lowest salary
+			\item Look for the most veteran/new employee
+			\item The department with more employees
+			\item The department with the youngest manager
+			\item Anything you can imagine!
+		\end{itemize}
+	\end{frame}
+
+\ThankYouFrame
+
+\end{document}
